@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ===== Custom Theme ===== */
+@theme {
+  --color-mystic-50: #f5f0ff;
+  --color-mystic-100: #ede5ff;
+  --color-mystic-200: #ddd0ff;
+  --color-mystic-300: #c4abff;
+  --color-mystic-400: #a67dff;
+  --color-mystic-500: #8b4fff;
+  --color-mystic-600: #7c2df7;
+  --color-mystic-700: #6d1de3;
+  --color-mystic-800: #5b18bf;
+  --color-mystic-900: #4c169c;
+  --color-mystic-950: #2e0a6a;
+
+  --color-cosmic-50: #eef8ff;
+  --color-cosmic-100: #d8eeff;
+  --color-cosmic-200: #b9e0ff;
+  --color-cosmic-300: #89cdff;
+  --color-cosmic-400: #51b0ff;
+  --color-cosmic-500: #298dff;
+  --color-cosmic-600: #126df5;
+  --color-cosmic-700: #0b57e1;
+  --color-cosmic-800: #0f47b6;
+  --color-cosmic-900: #133e8f;
+  --color-cosmic-950: #0f2757;
+
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fff3c6;
+  --color-gold-200: #ffe588;
+  --color-gold-300: #ffd24a;
+  --color-gold-400: #ffbe20;
+  --color-gold-500: #f99d07;
+  --color-gold-600: #dd7602;
+  --color-gold-700: #b75306;
+  --color-gold-800: #943f0c;
+  --color-gold-900: #7a340d;
+  --color-gold-950: #461a02;
+
+  --color-surface-900: #0a0a1a;
+  --color-surface-800: #111128;
+  --color-surface-700: #1a1a3e;
+  --color-surface-600: #252555;
+
+  --font-sans: 'Inter', 'Noto Sans Thai', system-ui, sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-twinkle: twinkle 3s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ===== Keyframes ===== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(139, 79, 255, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(139, 79, 255, 0.6);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  * {
+    border-color: theme(--color-mystic-800 / 30%);
+  }
+
+  body {
+    @apply bg-surface-900 text-mystic-50 antialiased;
+    font-family: var(--font-sans);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-mystic-700/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-mystic-600/70;
+  }
+}
+
+/* ===== Utility Classes ===== */
+@layer utilities {
+  .glass {
+    @apply bg-surface-800/60 backdrop-blur-xl border border-mystic-700/20;
+  }
+
+  .glass-card {
+    @apply bg-surface-800/40 backdrop-blur-lg border border-mystic-700/15 rounded-2xl;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-mystic-400 via-cosmic-400 to-gold-400 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+    background: linear-gradient(var(--color-surface-800), var(--color-surface-800)) padding-box,
+      linear-gradient(135deg, var(--color-mystic-500), var(--color-cosmic-500), var(--color-gold-500)) border-box;
+    border: 1px solid transparent;
+  }
+
+  .shimmer-text {
+    background: linear-gradient(90deg,
+        var(--color-mystic-300) 0%,
+        var(--color-gold-300) 50%,
+        var(--color-mystic-300) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .star {
+    @apply absolute rounded-full bg-white;
+    animation: twinkle var(--duration, 3s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+}
